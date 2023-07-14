@@ -1,0 +1,13 @@
+/*
+Enter your query here.
+*/
+SELECT DISTINCT CITY
+FROM STATION
+WHERE LEFT(CITY,1)='a' or LEFT(CITY,1)='e' or LEFT(CITY,1)='i' or LEFT(CITY,1)='o' or LEFT(CITY,1)='u'
+/* NOTE
+WHERE CITY REGEXP '^[aeiou].*[aeiou]$'
+where left(city,1)in ('A','E','I','O','U') and right(city,1) in ('a','e','i','o','u')
+LIKE matches case-insensitive
+WHERE CITY LIKE '[A,E,I,O,U]%' AND CITY LIKE '%[A,E,I,O,U]' is wrong!
+*/
+
