@@ -1,0 +1,15 @@
+/*
+The ROW_NUMBER() function is applied to each partition separately and reinitialized the row number for each partition.
+*/
+CREATE VIEW OCP AS
+(SELECT CASE WHEN Occupation='Doctor' THEN Name END AS Doctor,
+        CASE WHEN Occupation='Professor' THEN Name END AS Professor,
+        CASE WHEN Occupation='Singer' THEN Name END AS Singer,
+        CASE WHEN Occupation='Actor' THEN Name END AS Actor,
+ ROW_NUMBER() OVER (PARTITION BY Occupation ORDER BY Name) AS RN
+ FROM OCCUPATIONS
+);
+
+SELECT MAX(Doctor),MAX(Professor),MAX(Singer),MAX(Actor)
+FROM OCP
+GROUP BY RN
