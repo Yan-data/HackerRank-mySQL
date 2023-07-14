@@ -1,0 +1,7 @@
+SELECT ROUND(avg(lat),4) AS MEDIAN
+from
+( SELECT LAT_N as lat,
+ROW_NUMBER() OVER (ORDER BY LAT_N ASC) as rn1,
+ROW_NUMBER() OVER (ORDER BY LAT_N DESC) as rn2
+ FROM STATION) as s
+ WHERE rn1 in (rn2,rn2+1,rn2-1)
