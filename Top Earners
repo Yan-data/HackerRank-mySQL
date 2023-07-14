@@ -1,0 +1,3 @@
+SELECT min(salary*months), count(employee_id)
+FROM Employee
+WHERE salary*months= (select max(salary*months) from Employee)
