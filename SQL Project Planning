@@ -1,0 +1,36 @@
+/*
+Enter your query here.
+*/
+/*WITH START AS
+(
+SELECT Start_Date,
+    ROW_NUMBER() OVER (ORDER BY Start_Date) as RN
+FROM Projects
+WHERE Start_Date not in (SELECT End_Date FROM Projects)),
+
+END AS
+(
+SELECT End_Date,
+    ROW_NUMBER() OVER (ORDER BY End_Date) as RN
+FROM Projects
+WHERE End_Date not in (SELECT Start_Date FROM Projects))
+
+SELECT Start_Date,
+End_Date
+FROM START JOIN END
+ON START.RN=END.RN
+ORDER BY DATEDIFF(End_Date,Start_Date),Start_Date
+*/
+
+WITH st AS
+(
+SELECT Start_Date,
+    End_Date,
+    DATE_ADD(Start_Date, INTERVAL -ROW_NUMBER() OVER (ORDER BY Start_Date) DAY) as gr
+FROM Projects)
+
+SELECT min(Start_Date) AS S,
+max(End_Date) AS E
+FROM st
+GROUP BY gr
+ORDER BY DATEDIFF(E,S),S
