@@ -1,0 +1,16 @@
+with cte as (SELECT
+h.hacker_id,
+h.name,
+count(c.challenge_id) as total
+FROM Hackers h
+left join Challenges c using(hacker_id)
+group by h.hacker_id, h.name
+order by total desc, h.hacker_id)
+
+select *
+from cte 
+where total in 
+(select total from cte
+ group by total
+ having count(total)=1 or total=(select max(total) from cte)  
+)
