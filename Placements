@@ -1,0 +1,21 @@
+WITH st AS
+(SELECT s.ID, s.Name, f.Friend_ID, p.Salary FROM Friends f 
+    JOIN Packages p ON f.ID=p.ID
+    JOIN Students s ON f.ID=s.ID)
+    
+select st.name
+from st 
+left join Packages p on st.Friend_ID=p.ID
+where st.Salary<p.Salary
+order by p.Salary
+
+
+/*WITH cte AS 
+(SELECT s.id,name,f.friend_id,salary FROM students s 
+JOIN friends f ON s.id = f.id
+JOIN packages p ON s.id = p.id)
+
+/*SELECT c1.name FROM cte c1
+JOIN cte c2 ON c1.friend_id = c2.id
+WHERE c1.salary < c2.salary
+ORDER BY c2.salary
