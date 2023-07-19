@@ -1,0 +1,7 @@
+with cte as (select X,Y, row_number() over (order by X) rn from Functions f)
+
+SELECT distinct f1.X,
+f1.Y
+from cte f1, cte f2
+where f1.X=f2.Y and f1.Y=f2.x and f1.rn!=f2.rn and f1.X<=f1.Y
+order by f1.X
