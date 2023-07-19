@@ -1,0 +1,13 @@
+SELECT
+hacker_id,
+name,
+sum(m) total
+FROM 
+(SELECT
+hacker_id,
+max(score) as m
+FROM Submissions s
+GROUP BY hacker_id, challenge_id having m>0) as sc
+left join Hackers h using(hacker_id)
+GROUP BY hacker_id,name
+ORDER BY total desc, hacker_id
