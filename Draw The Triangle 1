@@ -1,0 +1,5 @@
+set @num=21;
+
+select repeat('* ',@num := @num-1)
+from INFORMATION_SCHEMA.Tables
+where @num>1
