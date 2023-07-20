@@ -1,6 +1,6 @@
 SET @num=0; /*need the semicolon*/
 
-SELECT REPEAT('* ', @num := @num+1)
+SELECT REPEAT('* ', @num := @num+1) /*:= assignment, must be used in select statement, otherwise means equal*/
 FROM INFORMATION_SCHEMA.Tables
 /*WHERE @num<20*/
 LIMIT 20
