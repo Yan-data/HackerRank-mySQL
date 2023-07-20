@@ -1,0 +1,6 @@
+SET @num=0; /*need the semicolon*/
+
+SELECT REPEAT('* ', @num := @num+1)
+FROM INFORMATION_SCHEMA.Tables
+/*WHERE @num<20*/
+LIMIT 20
