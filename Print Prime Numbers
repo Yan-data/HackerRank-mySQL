@@ -1,0 +1,36 @@
+/*loop solution using stored procesure*/
+
+DELIMITER $$
+
+CREATE PROCEDURE prime_print()
+    BEGIN
+    DECLARE nr INT;
+    DECLARE divider INT;
+    DECLARE prime BIT;
+    DECLARE str varchar(1000);
+    SET nr=2; 
+    SET str='';
+
+    WHILE nr<1001 do
+    SET prime=1; 
+    SET divider=nr-1;
+    
+        WHILE divider>=floor(SQRT(nr)) AND divider>1 do   
+        IF nr%divider=0 THEN SET prime=0;
+        END IF;
+        SET divider=divider-1;
+        END WHILE; 
+        
+    IF prime=1 THEN SET str=CONCAT(str,nr,'&');
+    END IF;
+
+    SET nr=nr+1;
+    END WHILE;
+    
+    SET str=SUBSTRING(str,1,LENGTH(str)-1);
+    SELECT str;
+    END $$
+
+DELIMITER ;
+
+call prime_print()
